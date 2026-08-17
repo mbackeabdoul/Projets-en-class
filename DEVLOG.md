@@ -1,0 +1,3 @@
+jai choisi le les tables Responsables, Classe, Etablissement, Eleves, pourquoi je lai ses choisi je me suis baser sur lecrant jai
+
+jai cree les entites Responsables, Classe, Responsables, Etablissement, Eleves, jai terminee que entiter classe par contrainte de temps jai utiliser des concepts  comme encapsculations pour que on peut pas aacceder au attrubue en dehhor de la classe et  constructeur ki rempli  lobjet a sa creations et getter ki a laccer a ses donnes priveee.........
