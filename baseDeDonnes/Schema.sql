@@ -3,12 +3,8 @@ CREATE TABLE eleves (
     matricule VARCHAR(50) NOT NULL UNIQUE,
     nom VARCHAR(50) NOT NULL,
     prenom VARCHAR(50) NOT NULL,
-    date_de_naissance DATE NOT NULL,
-    statut VARCHAR(20) NOT NULL DEFAULT 'En attente',
-    classe_id INT REFERENCES classes(id_classe),
-    etablissement_id INT  NOT NULL REFERENCES etablissement(id),
     responsable_id INT NOT NULL REFERENCES responsables(id),
-    CONSTRAINT check_eleve_statut CHECK (statut IN ('Inscrit', 'Non affece', 'En attente'))
+    
 );
 
 CREATE TABLE etablissement (
@@ -58,16 +54,9 @@ CREATE TABLE anneeScolaires(
 
 CREATE Table transferts(
     id SERIAL PRIMARY KEY,
-    id SERIAL PRIMARY KEY,
     eleve_id INT NOT NULL REFERENCES eleves(id),
-    type_transfert VARCHAR(50) NOT NULL,
     etablissment_dorigin VARCHAR (60) NOT NULL,
-    etablissement_final VARCHAR(50) NOT NULL,
-    statu VARCHAR(50) NOT NULL,
-    date_tranferts DATE NOTNULL,
-    CONSTRAINT check_transfert_type CHECK (type_transfert IN ('Entrant', 'Sortant')),
-    CONSTRAINT check_transfert_statut CHECK (statut IN ('En cours', 'Valide', 'Rejeter'))
-
+    statut varchar(30) check(statut in ('EN ATTENTE', 'INSCRIT', 'NON AFFECTE'))
 ); 
 CREATE TABLE inscriptions(
     id SERIAL PRIMARY KEY,

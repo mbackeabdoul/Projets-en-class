@@ -7,7 +7,6 @@ class Utilisateur{
     private string $email;
     private string $password;
     private ?Role $role;
-
     public function __construct(string $prenom, string $nom, string $email, string $password, ?Role $role=null, ?int $id = null){
         $this->id = $id;
         $this->prenom = $prenom;
@@ -16,7 +15,6 @@ class Utilisateur{
         $this->password = $password;
         $this->role = $role;
     }
-
     public function getId(): ?int{
         return $this->id;
     }

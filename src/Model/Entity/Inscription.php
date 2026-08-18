@@ -1,35 +1,71 @@
 <?php
 
 class Inscription {
-    private ?int $id;
-    private ?Eleve $eleve;
-    private ?AnneeScolaire $anneeScolaire;
-    private ?Classe $classe;
-    private ?Utilisateur $utilisateur;
+   private int $id;
+    private string $etablissement_dorigine;
+    private string $etablissement_final;
+    private Inscription $inscription;
+    private StatutTransfert $statut;
 
-    public function __construct(?Eleve $eleve = null, ?AnneeScolaire $anneeScolaire = null,?Classe $classe = null,?Utilisateur $utilisateur = null,?int $id = null){
-        $this->id = $id;
-        $this->eleve = $eleve;
-        $this->anneeScolaire = $anneeScolaire;
-        $this->classe = $classe;
-        $this->utilisateur = $utilisateur;
+    public function __construct(
+        string $etablissement_dorigine,
+        string $etablissement_final,
+        Inscription $inscription,
+        StatutTransfert $statut
+    ) {
+        $this->etablissement_dorigine = $etablissement_dorigine;
+        $this->etablissement_final = $etablissement_final;
+        $this->inscription = $inscription;
+        $this->statut = $statut;
     }
 
-    public function getId(): ?int {
+public function getId(): int
+    {
         return $this->id;
     }
 
-    public function getEleve():?Eleve {
-        return $this->eleve;
+    public function getEtablissemententrant(): string
+    {
+        return $this->etablissement_final;
     }
 
-    public function getAnneeScolaire():?AnneeScolaire {
-        return $this->anneeScolaire;
+    public function getEtablissementSortant(): string
+    {
+        return $this->etablissement_dorigine;
     }
-    public function getClasse():?Classe {
-        return $this->classe;
+
+    public function getInscription(): Inscription
+    {
+        return $this->inscription;
     }
-    public function getUtilisateur():?Utilisateur {
-        return $this->utilisateur;
+
+    public function getStatut(): StatutTransfert
+    {
+        return $this->statut;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function setEtablissemententrant(string $etablissement_final): void
+    {
+        $this->etablissement_final = $etablissement_final;
+    }
+
+    public function setEtablissementSortant(string $etablissement_dorigine): void
+    {
+        $this->etablissement_dorigine = $etablissement_dorigine;
+    }
+
+    public function setStatut(StatutTransfert $statut): void
+    {
+        $this->statut = $statut;
+    }
+
+    public function setInscription(Inscription $inscription): void
+    {
+        $this->inscription = $inscription;
     }
 }

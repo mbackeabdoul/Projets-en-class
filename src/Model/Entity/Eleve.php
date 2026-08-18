@@ -1,29 +1,18 @@
 <?php
 
 require_once __DIR__ . '/Responsable.php';
-require_once __DIR__ . '/Classe.php';
 
 class Eleve {
     private ?int $id;
-    private ?Responsable $responsable;
-    private string $ref;
     private string $prenom;
     private string $nom;
-    private string $numero;
-    private ?string $adresse;
     private string $matricule;
-    private ?Classe $classe;
-
-    public function __construct(string $ref,string $prenom,string $nom, string $numero, string $matricule,?Responsable $responsable = null,?Classe $classe = null,?string $adresse = null, ?int $id = null) {
+    private Responsable $responsable;
+    public function __construct(string $prenom, string $nom, string $matricule,?Responsable $responsable = null,?int $id = null) {
         $this->id = $id;
-        $this->responsable = $responsable;
-        $this->ref = $ref;
-        $this->prenom = $prenom;
         $this->nom = $nom;
-        $this->numero = $numero;
-        $this->adresse = $adresse;
         $this->matricule = $matricule;
-        $this->classe = $classe;
+        $this->responsable =$responsable;
     }
 
     public function getId():?int {

@@ -32,4 +32,10 @@ class Responsable{
 public function getAdresse(): string {
         return $this->adresse;
     }
+    public function setNom(string $nom):void{
+            $this->nom = $nom;
+    }
+     public function seId(string $id):void{
+            $this->id = $id;
+    }
 }
