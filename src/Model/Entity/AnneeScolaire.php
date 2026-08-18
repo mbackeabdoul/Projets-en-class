@@ -1,5 +1,4 @@
 <?php
-
 class AnneeScolaire{
     private ?int $id;
     private ?string $annee;
@@ -8,11 +7,9 @@ class AnneeScolaire{
         $this->id = $id;
         $this->annee = $annee;
     }
-
     public function getId(): ?int{
         return $this->id;
     }
-
     public function getAnnee(): ?string{
         return $this->annee;
     }

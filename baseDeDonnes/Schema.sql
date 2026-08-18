@@ -75,4 +75,8 @@ CREATE TABLE inscriptions(
     annee_id INT REFERENCES anneeScolaires(id_annee),
     classe_id INT REFERENCES classes(id_classe)
 );
+CREATE Table statuts(
+    id SERIAL PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL
+);
 
