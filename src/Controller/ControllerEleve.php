@@ -1,8 +1,11 @@
 <?php
-require_once dirname (__DIR__)."/Model/Repository/InscriptionRepository.php";
-class EleveController{
-    public function index() {
-        $eleves = InscriptionRepository::getAllInscriptionsAndEleves();
 
+class EleveController{
+    public static function index(): void
+    {
+        // $eleves = InscriptionRepository::getAllInscriptionsAndEleves(2);
+        require_once dirname(__DIR__) . "/views/eleves-inscriptions.html.php";
     }
-}
+} 
+
+EleveController::index();

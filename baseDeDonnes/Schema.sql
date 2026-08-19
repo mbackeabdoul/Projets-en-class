@@ -1,9 +1,11 @@
+-- Active: 1785776205173@@127.0.0.1@5432@gestion_eleve_db
+
 CREATE TABLE eleves (
     id SERIAL PRIMARY KEY,
     matricule VARCHAR(50) NOT NULL UNIQUE,
     nom VARCHAR(50) NOT NULL,
     prenom VARCHAR(50) NOT NULL,
-    responsable_id INT NOT NULL REFERENCES responsables(id),
+    responsable_id INT NOT NULL REFERENCES responsables(id)
     
 );
 
