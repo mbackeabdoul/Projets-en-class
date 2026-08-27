@@ -1,7 +1,6 @@
 <?php
 
-class Debug
-{
+class Debug{
     private function __construct(){}
     
     public static function vardump(mixed $data)

@@ -7,8 +7,9 @@ class StatuTransfert{
         $this->nom = $nom;
     }
     public function getId(): int {
-        return $this->id; }
-    public function getnom(): string{
+        return $this->id;
+     }
+    public function getnom():string{
         return $this->nom;
     }
 

@@ -1,3 +1,6 @@
+<?php
+// $inscriptions = '';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -28,7 +31,7 @@
 
   *{ box-sizing: border-box; }
 
-  body{
+  body{ 
     margin:0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background: var(--bg);
@@ -442,178 +445,102 @@
     </div>
 
     <div class="filters-bar">
-      <div class="search-input">
+<form method="GET" class="filters-bar">
+    <div class="search-input">
         <span class="icon">🔍</span>
-        <input type="text" placeholder="Nom, matricule ou responsable...">
-      </div>
-      <div class="select">Toutes les classes <span>▾</span></div>
-      <div class="select">Tous les statuts <span>▾</span></div>
-      <div class="count-tag">5 élève(s)</div>
+        <input type="text" name="recherche" placeholder="Nom, matricule ou responsable..."
+               value="<?= htmlspecialchars($recherche) ?>">
     </div>
 
+    <select name="classe_id" class="select">
+        <option value="">Toutes les classes</option>
+        <?php foreach ($classesPourAffichage as $classe): ?>
+            <option value="<?= $classe['id'] ?>" <?= $classe['selected'] ? 'selected' : '' ?>>
+                <?= htmlspecialchars($classe['nom']) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+
+    <select name="statut" class="select">
+        <option value="">Tous les statuts</option>
+        <?php foreach ($statutsDisponibles as $s): ?>
+            <option value="<?= $s['valeur'] ?>" <?= $s['selected'] ? 'selected' : '' ?>>
+                <?= $s['libelle'] ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+
+    <button type="submit" class="btn-primary">Filtrer</button>
+
+    <div class="count-tag"><?= count($inscriptions) ?> élève(s)</div>
+</form>
+   </div>
     <div class="table-card">
       <table>
         <thead>
-          <tr>
-            <th>ÉLÈVE</th>
-            <th>MATRICULE</th>
-            <th>CLASSE</th>
-            <th>ÉTABLISSEMENT</th>
-            <th>RESPONSABLE</th>
-            <th>STATUT</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="eleve-cell">
-                <div class="eleve-avatar">AF</div>
-                <div class="eleve-meta">
-                  <div class="name">Awa Fall</div>
-                  <div class="dob">Né(e) le 2014-05-18</div>
-                </div>
-              </div>
-            </td>
-            <td>JE-26001</td>
-            <td>
-              <div class="classe-cell">
-                <div class="main">CM2 A</div>
-                <div class="sub">CM2</div>
-              </div>
-            </td>
-            <td>Primaire Al Amal</td>
-            <td>
-              <div class="resp-cell">
-                <div class="name">Marième Fall</div>
-                <div class="phone">+221 77 420 18 04</div>
-              </div>
-            </td>
-            <td><span class="status-badge inscrit"><span class="dot"></span>Inscrit</span></td>
-            <td><button class="view-btn">👁</button></td>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="eleve-cell">
-                <div class="eleve-avatar">MB</div>
-                <div class="eleve-meta">
-                  <div class="name">Mariama Ba</div>
-                  <div class="dob">Né(e) le 2014-05-30</div>
-                </div>
-              </div>
-            </td>
-            <td>JE-26007</td>
-            <td>
-              <div class="classe-cell">
-                <div class="main">CM2 A</div>
-                <div class="sub">CM2</div>
-              </div>
-            </td>
-            <td>Primaire Al Amal</td>
-            <td>
-              <div class="resp-cell">
-                <div class="name">Khadidiatou Sy</div>
-                <div class="phone">+221 70 456 78 90</div>
-              </div>
-            </td>
-            <td><span class="status-badge inscrit"><span class="dot"></span>Inscrit</span></td>
-            <td><button class="view-btn">👁</button></td>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="eleve-cell">
-                <div class="eleve-avatar">CT</div>
-                <div class="eleve-meta">
-                  <div class="name">Cheikh Tidiane</div>
-                  <div class="dob">Né(e) le 2018-02-15</div>
-                </div>
-              </div>
-            </td>
-            <td>JE-26008</td>
-            <td>
-              <div class="classe-cell">
-                <div class="main">CP A</div>
-                <div class="sub">CP</div>
-              </div>
-            </td>
-            <td>Primaire Al Amal</td>
-            <td>
-              <div class="resp-cell">
-                <div class="name">Ibrahima Tidiane</div>
-                <div class="phone">+221 77 999 88 77</div>
-              </div>
-            </td>
-            <td><span class="status-badge inscrit"><span class="dot"></span>Inscrit</span></td>
-            <td><button class="view-btn">👁</button></td>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="eleve-cell">
-                <div class="eleve-avatar">MD</div>
-                <div class="eleve-meta">
-                  <div class="name">Mouhamed Diop</div>
-                  <div class="dob">Né(e) le 2019-03-10</div>
-                </div>
-              </div>
-            </td>
-            <td>JE-26011</td>
-            <td>
-              <div class="classe-cell unassigned">
-                <div class="main">Non affecté</div>
-                <div class="sub">CI</div>
-              </div>
-            </td>
-            <td>Primaire Al Amal</td>
-            <td>
-              <div class="resp-cell">
-                <div class="name">Babacar Diop</div>
-                <div class="phone">+221 77 333 22 11</div>
-              </div>
-            </td>
-            <td><span class="status-badge non-affecte"><span class="dot"></span>Non affecté</span></td>
-            <td><button class="view-btn">👁</button></td>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="eleve-cell">
-                <div class="eleve-avatar">AN</div>
-                <div class="eleve-meta">
-                  <div class="name">Aïssatou Ndiaye</div>
-                  <div class="dob">Né(e) le 2019-07-22</div>
-                </div>
-              </div>
-            </td>
-            <td>JE-26012</td>
-            <td>
-              <div class="classe-cell unassigned">
-                <div class="main">Non affecté</div>
-                <div class="sub">CI</div>
-              </div>
-            </td>
-            <td>Primaire Al Amal</td>
-            <td>
-              <div class="resp-cell">
-                <div class="name">Saliou Ndiaye</div>
-                <div class="phone">+221 78 444 33 22</div>
-              </div>
-            </td>
-            <td><span class="status-badge attente"><span class="dot"></span>En attente</span></td>
-            <td><button class="view-btn">👁</button></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="table-footer">
-        <div class="note">Dossiers synchronisés et sauvegardés</div>
-        <div class="page-num">1</div>
+  <tr>
+    <th>ÉLÈVE</th>
+    <th>MATRICULE</th>
+    <th>CLASSE</th>
+    <th>RESPONSABLE</th>
+    <th>STATUT</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+<?php foreach ($inscriptions as $inscription):?>
+  <?php
+    $eleve=$inscription->getEleve();
+    $responsable = $eleve->getResponsable();
+    $statut = $inscription->getStatut();
+    $statutClasses=[
+        'EN ATTENTE'=>'attente',
+        'INSCRIT'=>'inscrit',
+        'NON AFFECTE'=>'non-affecte',
+    ];
+    $statutClass = $statutClasses[$statut->value] ?? 'attente';?>
+  <tr>
+    <td>
+      <div class="eleve-cell">
+        <div class="eleve-meta">
+          <div class="name"><?= htmlspecialchars($eleve->getPrenom()) ?> <?= htmlspecialchars($eleve->getNom()) ?></div>
+        </div>
       </div>
+    </td>
+    <td><?=htmlspecialchars($eleve->getMatricule())?></td>
+    <td>
+      <div class="classe-cell">
+        <div class="main"><?= htmlspecialchars($inscription->getClasse()->getNom()) ?></div>
+      </div>
+    </td>
+    <td>
+      <div class="resp-cell">
+        <div class="name"><?= htmlspecialchars($responsable->getPrenom()) ?>
+         <?= htmlspecialchars($responsable->getNom())?></div>
+        <div class="phone"><?= htmlspecialchars($responsable->getNumero()) ?></div>
+      </div>
+    </td>
+    <td>
+      <span class="status-badge<?= $statutClass ?>">
+        <span class="dot"></span>
+        <?= htmlspecialchars($statut->value) ?>
+      </span>
+    </td>
+    <td>
+      <div class="view-btn">👁</div>
+    </td>
+  </tr>
+  <?php endforeach; ?>
+  </tbody>
+      </table>
     </div>
-
+     <div class="table-footer">
+    <?php if ($afficherPrecedent): ?>
+    <a href="?page=<?= $pagePrecedente ?>">← Précédent</a>
+   <?php endif; ?>
+   <span>Page <?= $page ?></span>
+   <a href="?page=<?= $pageSuivante ?>">Suivant →</a>
   </div>
-
+  </div>
 </body>
 </html>

@@ -1,71 +1,57 @@
 <?php
 
-class Inscription {
-   private int $id;
-    private string $etablissement_dorigine;
-    private string $etablissement_final;
-    private Inscription $inscription;
-    private StatutTransfert $statut;
+require_once __DIR__ . '/Eleve.php';
+require_once __DIR__ . '/Classe.php';
+require_once __DIR__ . '/Responsable.php';
+require_once __DIR__ . '/StatuInscription.php';
 
-    public function __construct(
-        string $etablissement_dorigine,
-        string $etablissement_final,
-        Inscription $inscription,
-        StatutTransfert $statut
-    ) {
-        $this->etablissement_dorigine = $etablissement_dorigine;
-        $this->etablissement_final = $etablissement_final;
-        $this->inscription = $inscription;
+class Inscription{
+    private ?int $id = null;
+    private Eleve $eleve;
+    private Classe $classe;
+    private StatuInscription $statut;
+    public function __construct(Eleve $eleve,Classe $classe,StatuInscription $statut){
+        $this->eleve = $eleve;
+        $this->classe = $classe;
         $this->statut = $statut;
     }
 
-public function getId(): int
-    {
+    public function getId(): ?int{
         return $this->id;
     }
 
-    public function getEtablissemententrant(): string
-    {
-        return $this->etablissement_final;
+    public function getEleve(): Eleve{
+        return $this->eleve;
     }
 
-    public function getEtablissementSortant(): string
-    {
-        return $this->etablissement_dorigine;
+    public function getClasse(): Classe{
+        return $this->classe;
     }
 
-    public function getInscription(): Inscription
-    {
-        return $this->inscription;
-    }
-
-    public function getStatut(): StatutTransfert
-    {
+    public function getStatut():StatuInscription{
         return $this->statut;
     }
 
-    public function setId(int $id): void
-    {
+    public function setId(int $id): void{
         $this->id = $id;
     }
 
-    public function setEtablissemententrant(string $etablissement_final): void
-    {
-        $this->etablissement_final = $etablissement_final;
-    }
+  
+    public static function toEntity(object $ligneBase):Inscription{$responsable = new Responsable(
+            $ligneBase->responsable_prenom,
+            $ligneBase->responsable_nom,
+            $ligneBase->responsable_telephone,
+            (int) $ligneBase->responsable_id
+        );
+    $eleve = new Eleve($ligneBase->eleve_prenom, $ligneBase->eleve_nom, $ligneBase->matricule,$responsable,$ligneBase->eleve_id);
+        $classe = new Classe(
+        $ligneBase->classe,
+        $ligneBase->classe_id
+        );
+        $statut = StatuInscription::from($ligneBase->statut);
 
-    public function setEtablissementSortant(string $etablissement_dorigine): void
-    {
-        $this->etablissement_dorigine = $etablissement_dorigine;
-    }
-
-    public function setStatut(StatutTransfert $statut): void
-    {
-        $this->statut = $statut;
-    }
-
-    public function setInscription(Inscription $inscription): void
-    {
-        $this->inscription = $inscription;
+        $inscription = new Inscription($eleve, $classe, $statut);
+        $inscription->setId((int) $ligneBase->id);
+        return $inscription;
     }
 }

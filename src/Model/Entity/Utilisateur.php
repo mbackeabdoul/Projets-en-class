@@ -31,8 +31,8 @@ class Utilisateur{
         return $this->email;
     }
 
-    public function getPassword():string
-    {     return $this->password;
+    public function getPassword():string{ 
+        return $this->password;
     }
 
     public function getRole():?Role{
